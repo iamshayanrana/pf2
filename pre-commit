@@ -1,0 +1,23 @@
+GNU nano 6.2 pre-commit
+
+#!/bin/bash
+
+# Check for trailing whitespace
+
+if git diff --cached --check --exit-code; then
+
+echo "Pre-commit hook: No trailing whitespace allowed"
+
+exit 1
+
+fi
+
+# Check for debugging statements
+
+if git diff --cached | grep -E '^\+' | grep -q 'console\.log'; then
+
+echo "Pre-commit hook: No debugging statements allowed"
+
+exit 1
+
+fi
